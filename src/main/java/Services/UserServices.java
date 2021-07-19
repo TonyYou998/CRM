@@ -28,5 +28,15 @@ public class UserServices {
 	
 		return users;
 	}
+	public void deleteById(int id) {
+		// TODO Auto-generated method stub
+		try {
+			dao.deleteById(id);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
 	
 }

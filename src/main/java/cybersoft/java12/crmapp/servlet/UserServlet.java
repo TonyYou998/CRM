@@ -47,6 +47,9 @@ public class UserServlet extends HttpServlet {
 			case UrlConst.USER_PROFILE:
 				getUserProfile(req, resp);
 				break;
+			case UrlConst.USER_DELETE:
+				getUserDelete(req,resp);
+				break;
 			case UrlConst.USER_ADD:
 				getUserAdd(req,resp);
 				
@@ -54,6 +57,13 @@ public class UserServlet extends HttpServlet {
 			
 			
 		}
+	}
+	private void getUserDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		// TODO Auto-generated method stub
+		int id=Integer.parseInt(req.getParameter("id"));
+			userSerVice.deleteById(id);
+			resp.sendRedirect(req.getContextPath()+UrlConst.USER_DASHBOARD);
+		
 	}
 	private void getUserAdd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub

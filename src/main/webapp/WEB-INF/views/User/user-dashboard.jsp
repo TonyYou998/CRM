@@ -67,7 +67,7 @@
 					                            <td>${user.phone}</td>
 					                            <td>
 					                            	<a href="" class="text-muted"><i class="material-icons">settings</i></a>
-					                            	<a href="" class="text-muted"><i class="material-icons">delete</i></a>
+					                            	<a href="<c:url value="<%=UrlConst.USER_DELETE%>" />?id=${user.id}" class="text-muted"><i class="material-icons">delete</i></a>
 					                            </td>
 					                        </tr>		
        									

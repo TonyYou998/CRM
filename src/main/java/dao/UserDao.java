@@ -68,4 +68,22 @@ public class UserDao {
 				return role;
 		return null;
 	}
+
+	public void deleteById(int id) {
+		// TODO Auto-generated method stub
+		Connection connection = MySqlConnection.getConnection();
+		String query = "DELETE FROM user WHERE id=?";
+		try {
+			PreparedStatement statement=connection.prepareStatement(query);
+			statement.setInt(1, id);
+			
+			statement.executeUpdate();
+			
+		}
+		catch(SQLException ex) {
+			
+			
+		}
+	}
+
 }
