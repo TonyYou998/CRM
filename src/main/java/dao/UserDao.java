@@ -86,4 +86,26 @@ public class UserDao {
 		}
 	}
 
+	public Boolean findUserById(int id) {
+		// TODO Auto-generated method stub
+		Boolean isExist=false;
+		Connection connection=MySqlConnection.getConnection();
+		String query="SELECT name FROM user u WHERE u.id=? ";
+		try {
+			PreparedStatement statement=connection.prepareStatement(query);
+			statement.setInt(1, id);
+			ResultSet result= statement.executeQuery();
+			if(result.next()) {
+				isExist=true;
+			}
+		}
+		catch(SQLException ex) {
+			System.out.println("user not exist");
+			
+		}
+		
+		
+		return isExist;
+	}
+
 }

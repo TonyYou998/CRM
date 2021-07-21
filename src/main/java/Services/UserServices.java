@@ -15,6 +15,11 @@ public class UserServices {
 	public  UserServices() {
 		dao=new UserDao();
 	}
+	public Boolean checkUserExist(int id) {
+		return dao.findUserById(id);
+		
+		
+	}
 	public List<User> findAll() {
 		// TODO Auto-generated method stub
 		List<User> users=null;

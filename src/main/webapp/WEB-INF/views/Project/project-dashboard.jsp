@@ -48,7 +48,7 @@
                     </thead>
                     <tbody class="list" id="staff02">
                   			<c:choose>
-                  				<c:when test="${users==null}">
+                  				<c:when test="${projects==null}">
                   					<tr class="row">
                   						<td class="col-12">there no data</td>
                   					</tr>
@@ -57,17 +57,18 @@
                   					
                   				</c:when>
                   					<c:otherwise>
-                  						<c:forEach var="user" items="${users}">
+                  						<c:forEach var="project" items="${projects}">
        										<tr>
 					                            <td>
-					                                ${user.name }
+					                                ${project.projectName }
 					                            </td>
-					                            <td>${user.email}</td>
-					                            <td><span class="badge badge-primary">${user.role.name}</span></td>
-					                            <td>${user.phone}</td>
+					                            <td>${project.projectDescription}</td>
+					                            
+					                            <td>${project.startDate}</td>
+					                            <td>${project.endDate}</td>
+					                            
 					                            <td>
-					                            	<a href="" class="text-muted"><i class="material-icons">settings</i></a>
-					                            	<a href="<c:url value="<%=UrlConst.USER_DELETE%>" />?id=${user.id}" class="text-muted"><i class="material-icons">delete</i></a>
+					                            	${project.ownerID }
 					                            </td>
 					                        </tr>		
        									
@@ -85,5 +86,6 @@
 		    </div>
 		</div>
 	</div>
+	
 	<!-- END BODY -->
-</body>
+	</body>

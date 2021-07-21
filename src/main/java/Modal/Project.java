@@ -5,7 +5,7 @@ public class Project {
 	private String projectDescription;
 	private String startDate;
 	private String endDate;
-	private String owner;
+	private int ownerID;
 	public String getProjectName() {
 		return projectName;
 	}
@@ -30,11 +30,11 @@ public class Project {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	public String getOwner() {
-		return owner;
+	public int getOwnerID() {
+		return ownerID;
 	}
-	public void setOwner(String owner) {
-		this.owner = owner;
+	public void setOwnerID(int id) {
+		this.ownerID = id;
 	}
 	
 }

@@ -43,7 +43,7 @@
 	                        <th>Email</th>
 	                        <th>Role</th>
 	                        <th>Phone</th>
-	                        <th>#</th>
+	                        <th>ID</th>
                         </tr>
                     </thead>
                     <tbody class="list" id="staff02">
@@ -65,6 +65,7 @@
 					                            <td>${user.email}</td>
 					                            <td><span class="badge badge-primary">${user.role.name}</span></td>
 					                            <td>${user.phone}</td>
+					                            <td>${user.id}</td>
 					                            <td>
 					                            	<a href="" class="text-muted"><i class="material-icons">settings</i></a>
 					                            	<a href="<c:url value="<%=UrlConst.USER_DELETE%>" />?id=${user.id}" class="text-muted"><i class="material-icons">delete</i></a>

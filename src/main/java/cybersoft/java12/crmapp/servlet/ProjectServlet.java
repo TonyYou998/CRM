@@ -1,6 +1,7 @@
 package cybersoft.java12.crmapp.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -95,30 +96,43 @@ public class ProjectServlet extends HttpServlet {
 		}
 	}
 
-	private void postAddProject(HttpServletRequest req, HttpServletResponse resp) {
+	private void postAddProject(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		String projectName=req.getParameter("project_name");
 		String description=req.getParameter("description");
 		String startDate=req.getParameter("start_date");
 		String endDate=req.getParameter("end_date");
-		String owner=req.getParameter("owner");
+		int owner=Integer.parseInt(req.getParameter("owner"));
 		prj=new Project();
 		prj.setProjectName(projectName);
 		prj.setProjectDescription(description);
 		prj.setStartDate(startDate);
 		prj.setEndDate(endDate);
 		prj.setEndDate(endDate);
-		prj.setOwner(owner);
-		prjService=new ProjectService();
-		prjService.addNewProject(prj);
+		prj.setOwnerID(owner);
 		
+		
+		prjService=new ProjectService();
+		if(!prjService.addNewProject(prj)) {
+			req.getRequestDispatcher(JspConst.PROJECT_ADD).forward(req, resp);
+			return;
+
+		}
+//			
+		
+		resp.sendRedirect(req.getContextPath()+UrlConst.PROJECT_DASHBOARD);
 		
 		
 	}
 
 	private void getDashboard(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		prjService=new ProjectService();
+		List<Project>projects= prjService.findAllProject();
+		if(projects !=null && !projects.isEmpty()) 
+			req.setAttribute("projects", projects);
+		
 		req.getRequestDispatcher(JspConst.PROJECT_DASHBOARD).forward(req, resp);
 		
 	}
