@@ -45,7 +45,7 @@ public class ProjectDao {
 	}
 	public List<Project> findAllProject() throws SQLException{
 		Connection connection=MySqlConnection.getConnection();
-		String query="SELECT p.name as name, p.description as description, p.start_date as start,p.end_date as end,p.owner as owner  FROM project p";
+		String query="SELECT p.name as name, p.description as description, p.start_date as start,p.end_date as end,p.owner as ownerID,u.name as owner  FROM project p,user u WHERE u.id=p.owner";
 		try {
 			PreparedStatement statement=connection.prepareStatement(query);
 			ResultSet result=statement.executeQuery();
@@ -55,7 +55,8 @@ public class ProjectDao {
 				prj.setProjectDescription(result.getString("description"));
 				prj.setStartDate(result.getString("start"));
 				prj.setEndDate(result.getString("end"));
-				prj.setOwnerID(result.getInt("owner"));
+				prj.setOwnerID(result.getInt("ownerID"));
+				prj.setOwnerName(result.getString("owner"));
 				
 				projects.add(prj);
 			}

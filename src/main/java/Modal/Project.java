@@ -6,6 +6,7 @@ public class Project {
 	private String startDate;
 	private String endDate;
 	private int ownerID;
+	private String ownerName;
 	public String getProjectName() {
 		return projectName;
 	}
@@ -35,6 +36,12 @@ public class Project {
 	}
 	public void setOwnerID(int id) {
 		this.ownerID = id;
+	}
+	public String getOwnerName() {
+		return ownerName;
+	}
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
 	}
 	
 }

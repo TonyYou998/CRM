@@ -20,7 +20,7 @@ public class UserDao {
 		Connection connection = MySqlConnection.getConnection();
 		String query = "SELECT u.id as id, u.name as name, u.email as email, "
 				+ "u.phone as phone, r.id as role_id, r.name as role_name, r.description as role_description "
-				+ "FROM user u, role r WHERE u.role_id = r.id";
+				+ "FROM user u, role r WHERE u.role_id = r.id order by u.id";
 		  
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);

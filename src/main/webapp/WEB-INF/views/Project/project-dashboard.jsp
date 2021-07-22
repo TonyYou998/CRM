@@ -68,7 +68,7 @@
 					                            <td>${project.endDate}</td>
 					                            
 					                            <td>
-					                            	${project.ownerID }
+					                            	${project.ownerName }
 					                            </td>
 					                        </tr>		
        									

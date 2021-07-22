@@ -130,6 +130,7 @@ public class ProjectServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		prjService=new ProjectService();
 		List<Project>projects= prjService.findAllProject();
+		
 		if(projects !=null && !projects.isEmpty()) 
 			req.setAttribute("projects", projects);
 		
