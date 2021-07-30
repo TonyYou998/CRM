@@ -1,7 +1,11 @@
 package Services;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+import Dto.UserCreateDto;
 import Modal.User;
 
 import dao.UserDao;
@@ -61,6 +65,19 @@ public class UserServices {
 			// TODO: handle exception
 		}
 		return user;
+	}
+	public void add(UserCreateDto userDto) {
+		// TODO Auto-generated method stub
+		String hashPwd=BCrypt.hashpw(userDto.getPassword(),BCrypt.gensalt(11));
+		System.out.println(hashPwd);
+		userDto.setPassword(hashPwd);
+	
+		try {
+			dao.addUser(userDto);
+		} catch (Exception e) {
+			// TODO: handle exception
+		} 
+		
 	}
 	
 }

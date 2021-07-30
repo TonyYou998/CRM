@@ -101,7 +101,7 @@ public class UserServlet extends HttpServlet {
 			
 			break;
 		case UrlConst.USER_ADD:
-			getUserAdd(req,resp);
+			postUserAdd(req,resp);
 			break;
 		case UrlConst.USER_EDIT:
 			postUserEdit(req,resp);
@@ -109,6 +109,22 @@ public class UserServlet extends HttpServlet {
 		
 		
 	}
+	}
+	private void postUserAdd(HttpServletRequest req, HttpServletResponse resp) {
+		// TODO Auto-generated method stub
+		UserCreateDto userDto=extractDtoFromReq(req);
+		userSerVice.add(userDto);
+		
+	}
+	private UserCreateDto extractDtoFromReq(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+			String emai=req.getParameter("email");
+			String password=req.getParameter("password");
+			String name=req.getParameter("name");
+			String address=req.getParameter("address");
+			String phone=req.getParameter("phone");
+			int roleID=Integer.parseInt(req.getParameter("role"));
+		return new UserCreateDto(emai, password, name, address, phone, roleID);
 	}
 	private void postUserEdit(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		// TODO Auto-generated method stub
@@ -118,23 +134,13 @@ public class UserServlet extends HttpServlet {
 		user.setAddress(req.getParameter("userAddress"));
 		user.setPassword(req.getParameter("userPhone"));
 		user.setPhone(req.getParameter("userPhone"));
-		user.setRoleID(Integer.parseInt(req.getParameter("userRoleID")));
+		user.setRoleID(Integer.parseInt(req.getParameter("role")));
 		user.setId(Integer.parseInt(req.getParameter("id")));
 		userSerVice.editUser(user);
 		resp.sendRedirect(req.getContextPath()+UrlConst.USER_EDIT+"?id="+user.getId());
 		
 	}
-	private void doPostUserAdd(HttpServletRequest req, HttpServletResponse resp) {
-		String email=req.getParameter("email");
-		String password=req.getParameter("password");
-		String phone=req.getParameter("phone");
-		String name =req.getParameter("name");
-		String address=req.getParameter("address");
-		int roleId=Integer.parseInt(req.getParameter("roleId")) ;
-		
-		//UserCreateDto dto=new UserCreateDto();
-		
-	}
+
 
 	private void getUserProfile(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub

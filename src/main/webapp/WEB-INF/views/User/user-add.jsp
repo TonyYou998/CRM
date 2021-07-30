@@ -38,27 +38,27 @@
                     <form action="<c:url value="<%=UrlConst.USER_ADD %>" />" method="post">
                         <div class="form-group">
                             <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email">
+                            <input type="email" class="form-control" name="email">
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password">
+                            <input type="password" class="form-control" name="password">
                         </div>
                         <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" class="form-control" id="name">
+                            <input type="text" class="form-control" name="name">
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone:</label>
-                            <input type="text" class="form-control" id="phone">
+                            <input type="text" class="form-control" name="phone">
                         </div>
                          <div class="form-group">
                             <label for="address">Address:</label>
-                            <textarea type="text" class="form-control" id="address" aria-label="With textarea"></textarea>
+                            <textarea type="text" class="form-control" name="address" aria-label="With textarea"></textarea>
                         </div>
                         <div class="form-group">
                                 <label for="role">Role</label>
-                                <select id="role" data-toggle="select" class="form-control">
+                                <select name="role" data-toggle="select" class="form-control">
                                     <option selected="" value="1">ADMIN</option>
                                     <option value="2">LEADER</option>
                                     <option value="3">STAFF</option>

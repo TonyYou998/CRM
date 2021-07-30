@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import Dto.UserCreateDto;
 import Modal.Role;
 import Modal.User;
 import dbconnection.MySqlConnection;
@@ -216,4 +217,31 @@ public class UserDao {
 		}
 	}
 
+	public void addUser(UserCreateDto userDto) throws SQLException {
+		// TODO Auto-generated method stub
+		String query="insert into user (email,password,name,address,phone,role_id) values(?,?,?,?,?,?)";
+		
+		Connection connection=MySqlConnection.getConnection();
+		try {
+			PreparedStatement statement=connection.prepareStatement(query);
+			 statement.setString(1, userDto.getEmail());
+			 statement.setString(2, userDto.getPassword());
+			 statement.setString(3, userDto.getName());
+			 statement.setString(4, userDto.getAddress());
+			 statement.setString(5, userDto.getPhone());
+			 statement.setInt(6, userDto.getRoleId());
+			 
+			 statement.executeUpdate();
+			
+		}
+		catch (SQLException e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
+		finally {
+			connection.close();
+		}
+	}
+
+	
 }
