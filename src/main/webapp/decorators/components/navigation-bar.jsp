@@ -24,18 +24,22 @@
                             <a class="dropdown-item" href="<c:url value="<%=UrlConst.PROJECT_DASHBOARD %>" />">
                                 Manage Project
                             </a>
-                            <a class="dropdown-item" href="<c:url value="<%=UrlConst.PROJECT_ADD %>" />">
+                            <c:if test="${roleID!=3}">
+                            	<a class="dropdown-item" href="<c:url value="<%=UrlConst.PROJECT_ADD %>" />">
                                 Create New Project
                             </a>
-                            <a class="dropdown-item" href="<c:url value="<%=UrlConst.PROJECT_STAFF %>" />">
-                                Manage Staffs
-                            </a>
+                            
+                            </c:if>
+                            
+                            
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="<%=UrlConst.TASK_DASHBOARD %>" />">Task</a>
-                    </li>
-                    <li class="nav-item dropdown">
+                   
+                    
+                    
+                    <c:choose>
+                    <c:when test="${roleID==1}">
+               		<li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                             User
                         </a>
@@ -61,6 +65,11 @@
                             </a>
                         </div>
                     </li>
+                    	
+                    	</c:when>
+								                    
+                    </c:choose>
+                    
                 </ul>
             </div>
         </div>

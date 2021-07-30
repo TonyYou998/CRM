@@ -41,8 +41,13 @@ public class UserServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int roleID=Integer.parseInt(String.valueOf(req.getSession().getAttribute("roleID")));
+		if(roleID!=1)
+			resp.sendRedirect(req.getContextPath()+UrlConst.HOME);
+		else
 		switch(req.getServletPath()) {
 			case UrlConst.USER_DASHBOARD:
+				
 				getUserDashboard(req,resp);
 				break;
 			case UrlConst.USER_PROFILE:
@@ -84,6 +89,10 @@ public class UserServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int roleID=Integer.parseInt(String.valueOf(req.getSession().getAttribute("roleID")));
+		if(roleID!=1)
+			resp.sendRedirect(req.getContextPath()+UrlConst.HOME);
+		else
 		switch(req.getServletPath()) {
 		case UrlConst.USER_DASHBOARD:
 		
@@ -134,9 +143,16 @@ public class UserServlet extends HttpServlet {
 
 	private void getUserDashboard(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List <User> users=userSerVice.findAll();
-		if(users!=null && !users.isEmpty())
-			req.setAttribute("users", users);
-		req.getRequestDispatcher(JspConst.USER_DASHBOARD).forward(req, resp);
+		
+		
+					List <User> users=userSerVice.findAll();
+			
+			if(users!=null && !users.isEmpty())
+				req.setAttribute("users", users);
+			req.getRequestDispatcher(JspConst.USER_DASHBOARD).forward(req, resp);
+		
+		
+		
+		
 	}
 }

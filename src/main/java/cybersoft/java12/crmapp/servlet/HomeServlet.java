@@ -21,8 +21,12 @@ public class HomeServlet extends HttpServlet {
 		
 		switch(path) {
 		case UrlConst.HOME:
+		int roleID= Integer.parseInt(String.valueOf(req.getSession().getAttribute("roleID")));
+		req.setAttribute("roleID", roleID);
+		System.out.println(roleID);
 			req.getRequestDispatcher("/WEB-INF/views/home/homepage.jsp")
 			.forward(req, resp);
+			
 			break;
 		
 			

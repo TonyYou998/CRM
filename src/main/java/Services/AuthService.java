@@ -10,15 +10,25 @@ public class AuthService {
 		dao=new AuthDao();
 		
 	}
-	public boolean login(String email,String password) {
+	public int login(String email,String password) {
 		try {
 			int result=dao.login( email, password);
-			return result>0;
+			return result;
 		}
 		catch(SQLException e	) {
 			e.printStackTrace();
-			return false;
+			return 0;
 		}
 		
+	}
+	public int checkRole(int id) {
+		// TODO Auto-generated method stub
+		int role_id=-1;
+		try {
+			role_id=dao.checkRoleByID(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return role_id;
 	}
 }

@@ -14,7 +14,8 @@ public class AuthDao {
 		Connection connection=MySqlConnection.getConnection();
 		
 		
-		String query="SELECT count(id) AS result FROM user WHERE email=? AND password=? ";
+		String query="SELECT  role_id AS result FROM user WHERE email=? AND password=? ";
+		
 		try {
 			PreparedStatement statement=connection.prepareStatement(query);
 			statement.setString(1, email);
@@ -22,7 +23,34 @@ public class AuthDao {
 			ResultSet resultSet=statement.executeQuery();
 			if(!resultSet.next())
 				return 0;
-			return resultSet.getInt(1);
+			return resultSet.getInt(1);			
+		}
+		catch(SQLException ex) {
+			System.out.println(ex);
+			ex.printStackTrace();
+			return 0;
+		}
+		finally {
+			connection.close(); //phair close
+			
+		}
+		
+		
+	}
+
+	public int checkRoleByID(int id) throws SQLException {
+		// TODO Auto-generated method stub
+Connection connection=MySqlConnection.getConnection();
+		
+		
+		String query="SELECT role_id AS result FROM user WHERE id=?";
+		try {
+			PreparedStatement statement=connection.prepareStatement(query);
+			statement.setInt(1, id);
+			
+			ResultSet resultSet=statement.executeQuery();
+			
+			return resultSet.getInt("result");
 		}
 		catch(SQLException ex) {
 			System.out.println("unable to connect to database");
@@ -33,8 +61,7 @@ public class AuthDao {
 			connection.close(); //phair close
 			
 		}
-		
-		return 0;
+		return -1;
 	}
 
 }

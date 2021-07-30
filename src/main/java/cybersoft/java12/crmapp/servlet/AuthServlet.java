@@ -39,19 +39,21 @@ public class AuthServlet extends HttpServlet {
 		switch(path) {
 		
 		case UrlConst.LOGIN:
-			Cookie cookie=new Cookie("firstcookie", "this_is_the_first_cookie");//khởi tạo cookie mới tên cookie:giá trị
-			cookie.setMaxAge(60);//set thời gian sống cho cookie het thoi gian click lai mat
+			Cookie cookie=new Cookie("firstcookie", "this_is_the_first_cookie");//khá»Ÿi táº¡o cookie má»›i tÃªn cookie:giÃ¡ trá»‹
+			cookie.setMaxAge(60);//set thá»�i gian sá»‘ng cho cookie het thoi gian click lai mat
 			resp.addCookie(cookie);//add cookie
-			Cookie [] cookies=req.getCookies();//lấy all cookie hiện có
+			Cookie [] cookies=req.getCookies();//láº¥y all cookie hiá»‡n cÃ³
 			for (int i=0;i<cookies.length;i++) {
 				if(cookies[i].getName().equals("email"))
-					//nếu cooki có lưu email thì set attribute cho email qua .jsp lấy dùng lại
+					//náº¿u cooki cÃ³ lÆ°u email thÃ¬ set attribute cho email qua .jsp láº¥y dÃ¹ng láº¡i
 					req.setAttribute("email", cookies[i].getValue());
 				
 				
 				
 			}
 			String status=String.valueOf(req.getSession().getAttribute("status"));
+			
+			
 			if(status!="null") {
 				resp.sendRedirect(req.getContextPath()+UrlConst.HOME);
 				break;
@@ -91,24 +93,36 @@ public class AuthServlet extends HttpServlet {
 					cookie.setMaxAge(60*60);
 					resp.addCookie(cookie);
 				}
-				HttpSession currentSession=req.getSession();//lấy session
-				String pingo=(String)currentSession.getAttribute("Pingo");//lấy tên và giá trị của session
-				System.out.printf("Pingo %s\n",pingo);
+				HttpSession currentSession=req.getSession();//láº¥y session
+				String pingo=(String)currentSession.getAttribute("Pingo");//láº¥y tÃªn vÃ  giÃ¡ trá»‹ cá»§a session
+			
 				//logic dang nhap
 				if(email==null || pass ==null)
 					isLoginSuccessfull=false;
-				/*else if(!userRespo.tryLogin(email, pass))
-						isLoginSuccessfull=false;*/
-				else if (!service.login(email, pass))
-					isLoginSuccessfull=false;
-				if(isLoginSuccessfull) {
-					currentSession.setAttribute("status", "logged successful");
-				
-					resp.sendRedirect(req.getContextPath()+UrlConst.HOME);
+				else {
+						int roleID=service.login(email, pass);
+						if(roleID==0) 
+							isLoginSuccessfull=false;
+						
+						 if(isLoginSuccessfull) {
+							currentSession.setAttribute("roleID", roleID);
+							currentSession.setAttribute("status", "logged successful");
+							resp.sendRedirect(req.getContextPath() + UrlConst.HOME);
+
+							
+						 }
+						 else
+							 resp.sendRedirect(req.getContextPath()+UrlConst.LOGIN);
+
 				}
 					
-				else
-					resp.sendRedirect(req.getContextPath()+UrlConst.LOGIN);
+
+					 
+											
+//					
+				
+			
+				
 				
 				break;
 			

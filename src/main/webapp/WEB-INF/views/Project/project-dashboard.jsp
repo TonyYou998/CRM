@@ -23,10 +23,17 @@
 	                </nav>
 	                <h1 class="m-0">Project Dashboard</h1>
 	            </div>
-	            <div class="ml-auto">
+	            <c:if test="${roleID!=3}">
+	            	 <div class="ml-auto">
 	                <a href="<c:url value="<%=UrlConst.PROJECT_ADD %>" />"  class="btn btn-light"><i class="material-icons icon-16pt text-muted mr-1">add</i>
-	    Add New Project</a>
-	            </div>
+	    			Add New Project</a>
+	            	</div> 
+	            
+	            </c:if>
+	           		
+	            
+	            
+	           
 	        </div>
 	    </div>
 	</div>
@@ -70,7 +77,6 @@
 					                            <td>
 					                            	${project.ownerName }
 					                            </td>
-					                            <td>
 					                            	<a class="text-muted "><i class="material-icons " data-toggle="modal" data-backdrop="false" onClick="openModal(${project.projectName})" style="cursor: pointer">settings</i></a>
 					                            	<a href="<c:url value="<%=UrlConst.PROJECT_DELETE%>" />?id=${project.projectID}" class="text-muted"><i class="material-icons">delete</i></a>
 					                            	<a href="<c:url value="<%=UrlConst.PROJECT_INFO %>" />?id=${project.projectID}"><i class="material-icons" style="cursor:pointer">info</i></a>
