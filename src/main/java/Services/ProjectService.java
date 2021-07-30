@@ -4,7 +4,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import Modal.Project;
+import Modal.ProjectUser;
+import Modal.Task;
 import dao.ProjectDao;
 
 public class ProjectService {
@@ -30,6 +35,7 @@ public class ProjectService {
 	}
 	
 	
+	
 	public List<Project> findAllProject(){
 		List<Project> prjs=null;
 		try {
@@ -40,5 +46,58 @@ public class ProjectService {
 		return prjs;
 	
 	}
-
+	public void deleteProjectByID(int id)  {
+		// TODO Auto-generated method stub
+		try {
+			projectDao.deleteProjectByID(id);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+	}
+	public void updateProject(Project prj) {
+		// TODO Auto-generated method stub
+		try {
+			projectDao.updateProject(prj);
+		}
+		catch(Exception e) {
+			
+		}
+	}
+	public void addTask(Task task) {
+		// TODO Auto-generated method stub
+		try {
+			projectDao.addTask(task);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	public List<ProjectUser> findStaffByProjectID(int id) {
+		// TODO Auto-generated method stub
+		List<ProjectUser> prjUsers=projectDao.findStaffByID(id);
+		return prjUsers;
+	}
+	public void addStaff(ProjectUser staff) {
+		// TODO Auto-generated method stub
+		try {
+			projectDao.addStaff(staff);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	public void removeStaffByID(int id,int userID) {
+		// TODO Auto-generated method stub
+		try {
+			projectDao.removeStaffByID(id,userID);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 }

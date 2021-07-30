@@ -15,15 +15,14 @@ public class UrlConst {
 	
 	// User
 	public static final String USER_PROFILE = "/user/profile";
+	
 	public static final String USER_EDIT 	= "/user/edit";
 	public static final String USER_CREATE 	= "/user/create";
 	public static final String USER_DASHBOARD 	= "/user";
 	public static final String USER_ADD 	= "/user/add";
 	public static final String USER_UPDATE 	= "/user/update";
 	public static final String USER_DELETE 	= "/user/delete";
-	//ADD
-	//UPDATE
-	//DELETE
+
 	
 	public static final String HEALTH 	= "/health";
 	// Task
@@ -32,6 +31,7 @@ public class UrlConst {
 	public static final String TASK_ADD 	= "/task/add";
 	public static final String TASK_UPDATE 	= "/task/update";
 	public static final String TASK_DELETE 	= "/task/delete";
+	public static final String TASK_UPDATE_STATUS="/task/status";
 	//role
 	public static final String ROLE_DASHBOARD="/role";
 	public static final String ROLE_ADD="/role/add";
@@ -45,6 +45,8 @@ public class UrlConst {
 	public static final String PROJECT_ADD ="/project/add";
 	public static final String PROJECT_UPDATE ="/project/update";
 	public static final String PROJECT_DELETE ="/project/delete";
+	public static final String PROJECT_INFO ="/project/info";
+	
 	public static final String PROJECT_STAFF ="/project/staff";
 	public static final String PROJECT_STAFF_ADD ="/project/staff/add";
 	public static final String PROJECT_STAFF_REMOVE ="/project/staff/remove";

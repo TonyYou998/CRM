@@ -108,4 +108,112 @@ public class UserDao {
 		return isExist;
 	}
 
+	public String findUserByID(int id) throws SQLException {
+		 String name="";
+		// TODO Auto-generated method stub
+		String query="SELECT name as name from user where id=?";
+		
+		Connection connection=MySqlConnection.getConnection();
+		try {
+			PreparedStatement statement=connection.prepareStatement(query);
+			 statement.setInt(1, id);
+			 ResultSet result=statement.executeQuery();
+			if(result.next())
+				name=result.getString("name");
+		}
+		catch (SQLException e) {
+			// TODO: handle exception
+		}
+		finally {
+			connection.close();
+		}
+		return name;
+	}
+
+	public User findAllUserInfoByID(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		String query="SELECT id as id, name as name,email as email,password as password,phone as phone,address as address, role_id as role_id from user where id=?";
+		
+		Connection connection=MySqlConnection.getConnection();
+		User user=new User();
+		try {
+			PreparedStatement statement=connection.prepareStatement(query);
+			 statement.setInt(1, id);
+			 ResultSet result=statement.executeQuery();
+			if(result.next()) {
+				
+				user.setId(result.getInt("id"));
+				user.setName(result.getString("name"));
+				user.setEmail(result.getString("email"));
+				user.setPassword(result.getString("password"));
+				user.setAddress(result.getString("address"));
+				user.setPhone(result.getString("phone"));
+				int roleId = result.getInt("role_id");
+				Role role = new Role();
+				role.setId(roleId);
+				switch(roleId) {
+					case 1:
+						role.setName("admin");
+						break;
+					case 2:
+						role.setName("leader");
+						break;
+					case 3:
+						role.setName("member");
+						break;
+				
+				}
+				user.setRole(role);
+				
+				
+				
+			
+			}
+				
+		}
+		catch (SQLException e) {
+			// TODO: handle exception
+		}
+		finally {
+			connection.close();
+		}
+		return user;
+	}
+
+	public void editUserByID(User user) throws SQLException {
+		// TODO Auto-generated method stub
+		String query="update user set email=?,name=?,address=?,phone=?,role_id=? where id=?";
+		
+		Connection connection=MySqlConnection.getConnection();
+
+		try {
+			PreparedStatement statement=connection.prepareStatement(query);
+			 statement.setString(1, user.getEmail());
+			 statement.setString(2, user.getName());
+			 statement.setString(3, user.getAddress());
+			 statement.setString(4, user.getPhone());
+			 statement.setInt(5, user.getRoleID());
+			 statement.setInt(6, user.getId());
+			 
+			 
+
+
+			 
+			statement.executeUpdate();
+			
+				
+				
+				
+			
+			
+				
+		}
+		catch (SQLException e) {
+			// TODO: handle exception
+		}
+		finally {
+			connection.close();
+		}
+	}
+
 }

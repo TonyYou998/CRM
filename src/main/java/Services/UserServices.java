@@ -33,6 +33,7 @@ public class UserServices {
 	
 		return users;
 	}
+	
 	public void deleteById(int id) {
 		// TODO Auto-generated method stub
 		try {
@@ -42,6 +43,24 @@ public class UserServices {
 			// TODO: handle exception
 		}
 		
+	}
+	public void editUser(User user) {
+		// TODO Auto-generated method stub
+		try {
+			dao.editUserByID(user);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	public User findUserByID(int id) {
+		// TODO Auto-generated method stub
+		User user=new User();
+		try {
+			user= dao.findAllUserInfoByID(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return user;
 	}
 	
 }

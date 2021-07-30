@@ -24,7 +24,8 @@ import dao.UserDao;
 		UrlConst.USER_PROFILE,
 		UrlConst.USER_ADD,
 		UrlConst.USER_UPDATE,
-		UrlConst.USER_DELETE
+		UrlConst.USER_DELETE,
+		UrlConst.USER_EDIT
 		
 })
 public class UserServlet extends HttpServlet {
@@ -47,6 +48,9 @@ public class UserServlet extends HttpServlet {
 			case UrlConst.USER_PROFILE:
 				getUserProfile(req, resp);
 				break;
+			case UrlConst.USER_EDIT:
+				getUSerEdit(req,resp);
+				break;
 			case UrlConst.USER_DELETE:
 				getUserDelete(req,resp);
 				break;
@@ -57,6 +61,14 @@ public class UserServlet extends HttpServlet {
 			
 			
 		}
+	}
+	private void getUSerEdit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int id= Integer.parseInt(req.getParameter("id"));
+			User user= userSerVice.findUserByID(id);
+			req.setAttribute("user", user);
+		
+		req.getRequestDispatcher(JspConst.USER_SETTING).forward(req, resp);
 	}
 	private void getUserDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		// TODO Auto-generated method stub
@@ -82,9 +94,26 @@ public class UserServlet extends HttpServlet {
 		case UrlConst.USER_ADD:
 			getUserAdd(req,resp);
 			break;
+		case UrlConst.USER_EDIT:
+			postUserEdit(req,resp);
+			break;
 		
 		
 	}
+	}
+	private void postUserEdit(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		// TODO Auto-generated method stub
+		User user=new User();
+		user.setName(req.getParameter("userName"));
+		user.setEmail(req.getParameter("userEmail"));
+		user.setAddress(req.getParameter("userAddress"));
+		user.setPassword(req.getParameter("userPhone"));
+		user.setPhone(req.getParameter("userPhone"));
+		user.setRoleID(Integer.parseInt(req.getParameter("userRoleID")));
+		user.setId(Integer.parseInt(req.getParameter("id")));
+		userSerVice.editUser(user);
+		resp.sendRedirect(req.getContextPath()+UrlConst.USER_EDIT+"?id="+user.getId());
+		
 	}
 	private void doPostUserAdd(HttpServletRequest req, HttpServletResponse resp) {
 		String email=req.getParameter("email");

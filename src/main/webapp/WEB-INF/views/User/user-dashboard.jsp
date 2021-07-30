@@ -24,8 +24,9 @@
 	                <h1 class="m-0">User Dashboard</h1>
 	            </div>
 	            <div class="ml-auto">
-	                <a href="" class="btn btn-light"><i class="material-icons icon-16pt text-muted mr-1">add</i>
-	    Add New User</a>
+	                <a href="<c:url value="<%=UrlConst.USER_ADD %>" />" class="btn btn-light"><i class="material-icons icon-16pt text-muted mr-1">add</i>
+	    				Add New User
+	    			</a>
 	            </div>
 	        </div>
 	    </div>
@@ -35,55 +36,43 @@
 	<!-- START BODY -->
 	<div class="container">
 		<div class="card card-form">
-		    <div class="row no-gutters">
-                <table class="table mb-0 thead-border-top-0">
-                    <thead>
-                        <tr>
-							<th>Name</th>
-	                        <th>Email</th>
-	                        <th>Role</th>
-	                        <th>Phone</th>
-	                        <th>ID</th>
-                        </tr>
-                    </thead>
-                    <tbody class="list" id="staff02">
-                  			<c:choose>
-                  				<c:when test="${users==null}">
-                  					<tr class="row">
-                  						<td class="col-12">there no data</td>
-                  					</tr>
-                  					
-                  					
-                  					
-                  				</c:when>
-                  					<c:otherwise>
-                  						<c:forEach var="user" items="${users}">
-       										<tr>
-					                            <td>
-					                                ${user.name }
-					                            </td>
-					                            <td>${user.email}</td>
-					                            <td><span class="badge badge-primary">${user.role.name}</span></td>
-					                            <td>${user.phone}</td>
-					                            <td>${user.id}</td>
-					                            <td>
-					                            	<a href="" class="text-muted"><i class="material-icons">settings</i></a>
-					                            	<a href="<c:url value="<%=UrlConst.USER_DELETE%>" />?id=${user.id}" class="text-muted"><i class="material-icons">delete</i></a>
-					                            </td>
-					                        </tr>		
-       									
-       									
-       									
-       									</c:forEach>
-                  						
-                  						
-                  				
-                  					</c:otherwise>
-                 			 </c:choose>
-                    	
-                                           	</tbody>
-                </table>
-		    </div>
+            <table class="table mb-0 thead-border-top-0">
+                <thead>
+                    <tr>
+						<th>Name</th>
+	                     <th>Email</th>
+	                     <th>Role</th>
+	                     <th>Phone</th>
+	                     <th>#</th>
+                    </tr>
+                </thead>
+                <tbody class="list" id="staff02">
+                 	<c:choose> 
+                 		<c:when test="${users == null}">
+                 			<tr class="row">
+                 				<td class="col-12 text-center">There is no data.</td>
+                 			</tr>
+                 		</c:when>
+                 		<c:otherwise>
+                 			<c:forEach var="user" items="${users}" >
+	                 			<tr>
+		                           <td>
+		                               ${user.name }
+		                           </td>
+		                           <td>${user.email }</td>
+		                           <td><span class="badge badge-primary">${user.role.name }</span></td>
+		                           <td>${user.phone }</td>
+		                           <td>
+		                           	<a href="<c:url value="<%=UrlConst.USER_EDIT%>"/>?id=${user.id}" class="text-muted"><i class="material-icons">settings</i></a>
+		                           	<a href="<c:url value="<%=UrlConst.USER_DELETE%>" />?id=${user.id}" class="text-muted"><i class="material-icons">delete</i></a>
+		                           	
+		                           </td>
+	                    		</tr>
+                 			</c:forEach>
+                 		</c:otherwise>
+                 	</c:choose>
+               	</tbody>
+            </table>
 		</div>
 	</div>
 	<!-- END BODY -->

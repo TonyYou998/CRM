@@ -9,8 +9,18 @@ public class User {
 	private String name;
 	private String address;
 	private String phone;
+	private int roleID;
 	
-	
+	public int getRoleID() {
+		return roleID;
+	}
+
+
+	public void setRoleID(int roleID) {
+		this.roleID = roleID;
+	}
+
+
 	private Role role;
 
 

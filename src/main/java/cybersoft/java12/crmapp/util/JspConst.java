@@ -7,6 +7,8 @@ public class JspConst {
 	public static final String PROJECT_DASHBOARD 	= "/WEB-INF/views/Project/project-dashboard.jsp";
 	public static final String PROJECT_ADD 	= "/WEB-INF/views/Project/project-add.jsp";
 	public static final String PROJECT_STAFF	= "/WEB-INF/views/Project/project-staff.jsp";
+	public static final String PROJECT_INFO	= "/WEB-INF/views/Project/project-info.jsp";
+	
 //	role
 	public static final String ROLE_DASHBOARD	= "/WEB-INF/views/Role/role-dashboard.jsp";
 	public static final String ROLE_ADD 	= "/WEB-INF/views/Role/role-add.jsp";
@@ -19,6 +21,8 @@ public class JspConst {
 	public static final String USER_DASHBOARD	= "/WEB-INF/views/User/user-dashboard.jsp";
 	public static final String USER_ADD	= "/WEB-INF/views/User/user-add.jsp";
 	public static final String USER_UPDATE	= "/WEB-INF/views/User/user-update.jsp";
+	public static final String USER_SETTING	= "/WEB-INF/views/User/user-setting.jsp";
+
 	
 	
 	

@@ -13,6 +13,16 @@
 
 <!-- jQuery -->
 <script src="<c:url value="/assets/vendor/jquery.min.js" />"></script>
+<script type="text/javascript">
+	const openModal=function(name){
+		
+		$("#projectName").val(name);
+		$('#demo').modal({
+			  show:true,
+			  backdrop:false
+			})
+	}			
+</script>
 
 <!-- Bootstrap -->
 <script src="<c:url value="/assets/vendor/popper.min.js" />"></script>
