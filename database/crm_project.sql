@@ -16,31 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `project`
---
-
-DROP TABLE IF EXISTS `project`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `project` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `start_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL,
-  `owner` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_PROJECT_USER_OWNER` (`owner`),
-  CONSTRAINT `FK_PROJECT_USER_OWNER` FOREIGN KEY (`owner`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `project`
 --
 
 LOCK TABLES `project` WRITE;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
+INSERT INTO `project` VALUES (31,'project1','\r\n      demo                                  ','2021-07-31','2021-08-04',14),(32,'demo2','\r\n                  dwasdasd                      ','2021-08-07','2021-08-07',19),(33,'project3','dasdasd\r\n                                        ','2021-07-30','2021-08-07',26),(34,'p4','dsadsa\r\n                                        ','2021-08-07','2021-08-06',16),(35,'project16','sdasd\r\n                                        ','2021-08-07','2021-08-07',180),(36,'p100','dsad\r\n                                        ','2021-07-31','2021-08-07',1015);
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-30 23:37:31
+-- Dump completed on 2021-07-31 23:47:16

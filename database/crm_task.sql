@@ -16,37 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `task`
---
-
-DROP TABLE IF EXISTS `task`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `task` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `start_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL,
-  `project_id` int DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
-  `status_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_TASK_USER` (`user_id`),
-  KEY `FK_TASK_PROJECT` (`project_id`),
-  KEY `FK_TASK_STATUS` (`status_id`),
-  CONSTRAINT `FK_TASK_PROJECT` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
-  CONSTRAINT `FK_TASK_STATUS` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`),
-  CONSTRAINT `FK_TASK_USER` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Dumping data for table `task`
 --
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
+INSERT INTO `task` VALUES (13,'demo1','sadas','2021-07-30','2021-08-07',31,14,1),(15,'task2','ssssssssss','2021-07-30','2021-08-06',32,14,1),(16,'task3','dsadas','2021-07-24','2021-08-07',32,14,1),(17,'task12','asda','2021-08-06','2021-08-07',33,14,1),(18,'task1','adssa','2021-08-07','2021-08-07',34,1016,1),(19,'task13','dasd','2021-08-06','2021-08-07',33,1016,1);
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-30 23:37:31
+-- Dump completed on 2021-07-31 23:47:15
