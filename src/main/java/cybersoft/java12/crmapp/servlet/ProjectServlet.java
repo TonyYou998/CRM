@@ -222,7 +222,7 @@ public class ProjectServlet extends HttpServlet {
 		String description=req.getParameter("description");
 		String startDate=req.getParameter("start_date");
 		String endDate=req.getParameter("end_date");
-		int owner=Integer.parseInt(req.getParameter("owner"));
+		int owner=Integer.parseInt(String.valueOf(req.getSession().getAttribute("userID")));
 		prj=new Project();
 		
 		prj.setProjectName(projectName);
@@ -249,8 +249,14 @@ public class ProjectServlet extends HttpServlet {
 	private void getDashboard(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		prjService=new ProjectService();
-		List<Project>projects= prjService.findAllProject();
-		
+		int roleID= Integer.parseInt(String.valueOf(req.getSession().getAttribute("roleID")));
+		List<Project> projects;
+		int userID=Integer.parseInt(String.valueOf(req.getSession().getAttribute("userID")));
+		if( roleID==1)
+			projects= prjService.findAllProject();
+		else if(roleID==2)
+			projects=prjService.findProjectLeader(userID);
+		else projects=prjService.findUserProjectByID(userID);
 		if(projects !=null && !projects.isEmpty()) 
 			req.setAttribute("projects", projects);
 		

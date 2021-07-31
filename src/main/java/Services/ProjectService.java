@@ -2,6 +2,7 @@ package Services;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -98,6 +99,30 @@ public class ProjectService {
 			e.printStackTrace();
 		}
 	}
+	public List<Project> findUserProjectByID(int userID) {
+		// TODO Auto-generated method stub
+		List<Project> projects=new LinkedList<Project>() ;
+		try {
+			projects= projectDao.findProjectByID(userID);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return projects;
+	}
+	public List<Project> findProjectLeader(int userID) {
+		// TODO Auto-generated method stub
+		List<Project> projects=new LinkedList<Project>() ;
+		try {
+			projects= projectDao.findProjectLeader(userID);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return projects;
+	}
+
+
 	
 	
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Dto.UserLoginDto;
 import Respository.UserRespository;
 import Services.AuthService;
 import cybersoft.java12.crmapp.util.JspConst;
@@ -100,15 +101,17 @@ public class AuthServlet extends HttpServlet {
 				if(email==null || pass ==null)
 					isLoginSuccessfull=false;
 				else {
-						int roleID=service.login(email, pass);
+						UserLoginDto dto=service.login(email, pass);
+						int roleID=dto.getRoleID();
 						if(roleID==0) 
 							isLoginSuccessfull=false;
 						
 						 if(isLoginSuccessfull) {
 							currentSession.setAttribute("roleID", roleID);
 							currentSession.setAttribute("status", "logged successful");
+							currentSession.setAttribute("userID", dto.getId());
 							resp.sendRedirect(req.getContextPath() + UrlConst.HOME);
-
+							
 							
 						 }
 						 else

@@ -22,6 +22,7 @@ public class ProjectDao {
 		Connection connection=MySqlConnection.getConnection();
 		Boolean isSuccess=true;
 		String query="INSERT INTO project (name,description,start_date,end_date,owner) VALUES (?,?,?,?,?)";
+
 		try {
 			PreparedStatement statement=connection.prepareStatement(query);
 			
@@ -48,6 +49,7 @@ public class ProjectDao {
 	public List<Project> findAllProject() throws SQLException{
 		Connection connection=MySqlConnection.getConnection();
 		String query="SELECT p.id as project_id,p.name as name, p.description as description, p.start_date as start,p.end_date as end,p.owner as ownerID,u.name as owner  FROM project p,user u WHERE u.id=p.owner";
+		
 		projects=new LinkedList<Project>();
 		try {
 			PreparedStatement statement=connection.prepareStatement(query);
@@ -75,6 +77,7 @@ public class ProjectDao {
 		}
 		return projects;
 	}
+	
 	public void deleteProjectByID(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection connection=MySqlConnection.getConnection();
@@ -121,7 +124,7 @@ public class ProjectDao {
 	}
 	public void addTask(Task task) throws SQLException {
 		// TODO Auto-generated method stub
-		String query="INSERT INTO task (name, description, start_date, end_date, project_id, user_id, status_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String query="INSERT INTO task (name, description, start_date, end_date, project_id, user_id, status_id) VALUES (?, ?, ?, ?, ?, ?, ?);";
 		Connection connection=MySqlConnection.getConnection();
 		try {
 			PreparedStatement statement=connection.prepareStatement(query);
@@ -133,7 +136,7 @@ public class ProjectDao {
 			statement.setInt(6, task.getUserID());
 			statement.setInt(7, 1);
 			int row= statement.executeUpdate();
-			System.out.printf("row affect:",row);
+			
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -210,6 +213,77 @@ public class ProjectDao {
 		finally {
 			connection.close();
 		}
+	}
+	public List<Project> findProjectByID(int userID) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection connection=MySqlConnection.getConnection();
+				String query="select distinct p.name as name,p.description as description,p.start_date as start,p.end_date as end,u.name as owner,p.id as project_id,p.owner as ownerID\r\n"
+				+ "from project p,task t,user u\r\n"
+				+ "where  (t.project_id=p.id) and (t.user_id=?) and (u.id=p.owner)";
+				
+		
+		projects=new LinkedList<Project>();
+		try {
+			PreparedStatement statement=connection.prepareStatement(query);
+			statement.setInt(1, userID);
+			ResultSet result=statement.executeQuery();
+			while(result.next()) {
+				Project prj=new Project();
+				prj.setProjectName(result.getString("name"));
+				prj.setProjectDescription(result.getString("description"));
+				prj.setStartDate(result.getString("start"));
+				prj.setEndDate(result.getString("end"));
+				prj.setOwnerID(result.getInt("ownerID"));
+				prj.setOwnerName(result.getString("owner"));
+				prj.setProjectID(result.getInt("project_id"));	
+				
+				projects.add(prj);
+			}
+			
+		}
+		catch(SQLException ex) {
+			System.out.println("unable to connect to database");
+			ex.printStackTrace();
+		}
+		finally {
+			connection.close();
+		}
+		return projects;
+	}
+	public List<Project> findProjectLeader(int userID) throws SQLException {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+				Connection connection=MySqlConnection.getConnection();
+						String query="select distinct p.name as name,p.description as description,p.start_date as start,p.end_date as end,u.name as owner,p.id as project_id,p.owner as ownerID from project p,user u where p.owner=? and (u.id=p.owner);";
+						
+				
+				projects=new LinkedList<Project>();
+				try {
+					PreparedStatement statement=connection.prepareStatement(query);
+					statement.setInt(1, userID);
+					ResultSet result=statement.executeQuery();
+					while(result.next()) {
+						Project prj=new Project();
+						prj.setProjectName(result.getString("name"));
+						prj.setProjectDescription(result.getString("description"));
+						prj.setStartDate(result.getString("start"));
+						prj.setEndDate(result.getString("end"));
+						prj.setOwnerID(result.getInt("ownerID"));
+						prj.setOwnerName(result.getString("owner"));
+						prj.setProjectID(result.getInt("project_id"));	
+						
+						projects.add(prj);
+					}
+					
+				}
+				catch(SQLException ex) {
+					System.out.println("unable to connect to database");
+					ex.printStackTrace();
+				}
+				finally {
+					connection.close();
+				}
+				return projects;
 	}
 	
 }

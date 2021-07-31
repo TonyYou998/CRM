@@ -13,13 +13,13 @@ import dbconnection.MySqlConnection;
 
 public class AuthDao {
 	
-	public int login(String email, String password) throws SQLException {
+	public UserLoginDto login(String email, String password) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection connection=MySqlConnection.getConnection();
 		UserLoginDto dto=new UserLoginDto(email, password);
 		
 //		BCrypt.checkpw();
-		String query="SELECT  role_id as result,password as password FROM user WHERE email=?";
+		String query="SELECT  role_id as result,password as password,id as id FROM user WHERE email=?";
 		
 		try {
 			PreparedStatement statement=connection.prepareStatement(query);
@@ -27,21 +27,26 @@ public class AuthDao {
 			
 			ResultSet resultSet=statement.executeQuery();
 			if(!resultSet.next())
-				return 0;
+				return dto ;
 			else {
 				dto.setPassword(resultSet.getString(2));
 				
 				if(BCrypt.checkpw(password, dto.getPassword()))
-					return resultSet.getInt(1);		
+				{
+					dto.setRoleID(resultSet.getInt(1));
+					dto.setId(resultSet.getInt(3));
+					return dto;
+				}
+//					return resultSet.getInt(1);		
 			}
 				
 
-				return 0;
+				return dto;
 		}
 		catch(SQLException ex) {
 			System.out.println(ex);
 			ex.printStackTrace();
-			return 0;
+			return dto;
 		}
 		finally {
 			connection.close(); //phair close

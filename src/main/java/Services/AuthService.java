@@ -2,6 +2,7 @@ package Services;
 
 import java.sql.SQLException;
 
+import Dto.UserLoginDto;
 import dao.AuthDao;
 
 public class AuthService {
@@ -10,15 +11,18 @@ public class AuthService {
 		dao=new AuthDao();
 		
 	}
-	public int login(String email,String password) {
-		try {
-			int result=dao.login( email, password);
-			return result;
-		}
-		catch(SQLException e	) {
-			e.printStackTrace();
-			return 0;
-		}
+	public UserLoginDto login(String email,String password) {
+	
+			try {
+				return dao.login( email, password);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+		
+			
+	
 		
 	}
 	public int checkRole(int id) {

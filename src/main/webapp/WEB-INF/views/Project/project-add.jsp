@@ -47,13 +47,9 @@
                                         <input type="date" id="phone_number" name="end_date" class="form-control" required>
                                     </div>
                                 </div>
+                                 
 
-                                <div class="form-group row">
-                                    <label for="present_address" class="col-md-4 col-form-label text-md-right">owner</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="present_address"  class="form-control" name="owner" required>
-                                    </div>
-                                </div>
+                          
 
                                 
                              

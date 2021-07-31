@@ -35,8 +35,12 @@
                 <th>completed</th>
                 <th>number of staff</th>
                 <th>days until deadline</th>
-                <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#exampleModal" data-backdrop="false">New task</button>
+                <c:if test="${ roleID==1 || roleID==2}">
+                	  <button class="btn btn-outline-secondary mr-2" data-toggle="modal" data-target="#exampleModal" data-backdrop="false">New task</button>
                 <button class="btn btn-outline-secondary mx-2" data-toggle="modal" data-target="#newStaffModal" data-backdrop="false" >New staff</button>
+                
+                </c:if>
+              
               </tr>
 
               
