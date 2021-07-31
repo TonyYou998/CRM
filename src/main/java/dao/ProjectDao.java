@@ -217,9 +217,8 @@ public class ProjectDao {
 	public List<Project> findProjectByID(int userID) throws SQLException {
 		// TODO Auto-generated method stub
 		Connection connection=MySqlConnection.getConnection();
-				String query="select distinct p.name as name,p.description as description,p.start_date as start,p.end_date as end,u.name as owner,p.id as project_id,p.owner as ownerID\r\n"
-				+ "from project p,task t,user u\r\n"
-				+ "where  (t.project_id=p.id) and (t.user_id=?) and (u.id=p.owner)";
+				String query="select distinct p.name as name,p.description as description,p.start_date as start,p.end_date as end,u.name as owner,p.id as project_id,p.owner as ownerID from project p,project_user pu,task t,user u \r\n"
+						+ "where  (pu.user_id=?) and (u.id=p.owner) and (pu.project_id=p.id)";
 				
 		
 		projects=new LinkedList<Project>();
@@ -254,7 +253,9 @@ public class ProjectDao {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 				Connection connection=MySqlConnection.getConnection();
-						String query="select distinct p.name as name,p.description as description,p.start_date as start,p.end_date as end,u.name as owner,p.id as project_id,p.owner as ownerID from project p,user u where p.owner=? and (u.id=p.owner);";
+						String query="select distinct p.name as name,p.description as description,p.start_date as start,p.end_date as end,u.name as owner,p.id as project_id,p.owner as ownerID "
+								+ "from project p,user u "
+								+ "where p.owner=? and (u.id=p.owner);";
 						
 				
 				projects=new LinkedList<Project>();

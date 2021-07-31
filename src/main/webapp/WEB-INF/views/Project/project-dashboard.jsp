@@ -78,8 +78,11 @@
 					                            	${project.ownerName }
 					                            </td>
 					                            <td>
-					                            	<a class="text-muted "><i class="material-icons " data-toggle="modal" data-backdrop="false" onClick="openModal(${project.projectName})" style="cursor: pointer">settings</i></a>
+					                            	<c:if test="${roleID !=3 }">
+					                            		<a class="text-muted "><i class="material-icons " data-toggle="modal" data-backdrop="false" onClick="openModal(${project.projectName})" style="cursor: pointer">settings</i></a>
 					                            	<a href="<c:url value="<%=UrlConst.PROJECT_DELETE%>" />?id=${project.projectID}" class="text-muted"><i class="material-icons">delete</i></a>
+					                            	</c:if>
+					                            	
 					                            	<a href="<c:url value="<%=UrlConst.PROJECT_INFO %>" />?id=${project.projectID}"><i class="material-icons" style="cursor:pointer">info</i></a>
 					                            </td>
 					                        </tr>		

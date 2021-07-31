@@ -113,9 +113,12 @@
 							      <td>${task.userName}</td>
 							      <td>${task.statusName}</td>
 							      <td>
-							      	<a class="text-muted "><i class="material-icons " data-toggle="modal" data-target="#new__task" data-backdrop="false" style="cursor: pointer">settings</i></a>
+							      	<c:if test="${roleID !=3 }">
+							      		<a class="text-muted "><i class="material-icons " data-toggle="modal" data-target="#new__task" data-backdrop="false" style="cursor: pointer">settings</i></a>
 					                <a href="<c:url value="<%=UrlConst.TASK_DELETE%>" />?id=${task.id}" class="text-muted"><i class="material-icons">delete</i></a>
-					                <a  href="<c:url value="<%=UrlConst.TASK_UPDATE_STATUS %>"/>?id=${task.id}" style="cursor:pointer"><i class="material-icons">update</i></a>
+							      	</c:if>
+							      	
+					                <a  href="<c:url value="<%=UrlConst.TASK_UPDATE_STATUS %>"/>?id=${task.id}" style="cursor:pointer" class="text-muted"><i class="material-icons">update</i></a>
 							      </td>
 							    </tr>
 							   
@@ -159,10 +162,10 @@
         				 <tr>
 					      <th scope="col">#</th>
 					      <th scope="col">name</th>
-					      <th scope="col">description</th>
-					      <th scope="col">deadline</th>
-					      <th scope="col">handler</th>
-					       <th scope="col">status</th>
+					      <th scope="col">email</th>
+					    	 <th scope="col">join date</th>
+					      <th scope="col">role</th>
+					       
 					      
 					    </tr>
 					  </thead>
@@ -176,9 +179,14 @@
 							      <td>${staff.email}</td>
 							      <td>${staff.joinDate}</td>
 							      <td>${staff.role}</td>
-							      <td>
-					                <a href="<c:url value="<%=UrlConst.PROJECT_STAFF_REMOVE%>" />?id=${staff.projectID}&userID=${staff.userID}" class="text-muted"><i class="material-icons">delete</i></a>
-							      </td>
+							      <c:if test="${roleID !=3}">
+							     		 <td>
+					                		<a href="<c:url value="<%=UrlConst.PROJECT_STAFF_REMOVE%>" />?id=${staff.projectID}&userID=${staff.userID}" class="text-muted"><i class="material-icons">delete</i></a>
+							      		</td> 
+							      
+							      </c:if>
+							      
+							     
 							    </tr>
 							   
 							  
