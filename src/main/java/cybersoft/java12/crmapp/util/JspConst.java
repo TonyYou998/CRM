@@ -8,7 +8,8 @@ public class JspConst {
 	public static final String PROJECT_ADD 	= "/WEB-INF/views/Project/project-add.jsp";
 	public static final String PROJECT_STAFF	= "/WEB-INF/views/Project/project-staff.jsp";
 	public static final String PROJECT_INFO	= "/WEB-INF/views/Project/project-info.jsp";
-	
+	public static final String PROJECT_UPDATE	= "/WEB-INF/views/Project/update-project.jsp";
+
 //	role
 	public static final String ROLE_DASHBOARD	= "/WEB-INF/views/Role/role-dashboard.jsp";
 	public static final String ROLE_ADD 	= "/WEB-INF/views/Role/role-add.jsp";

@@ -64,7 +64,7 @@
                   					
                   				</c:when>
                   					<c:otherwise>
-                  						<c:forEach var="project" items="${projects}">
+                  						<c:forEach var="project" varStatus="number" items="${projects}">
        										<tr>
 					                            <td>
 					                                ${project.projectName }
@@ -79,7 +79,7 @@
 					                            </td>
 					                            <td>
 					                            	<c:if test="${roleID !=3 }">
-					                            		<a class="text-muted "><i class="material-icons " data-toggle="modal" data-backdrop="false" onClick="openModal(${project.projectName})" style="cursor: pointer">settings</i></a>
+					                            		<a class="text-muted" href="<c:url value="<%=UrlConst.PROJECT_UPDATE %>" />?id=${project.projectID}" ><i class="material-icons" >settings</i></a>
 					                            	<a href="<c:url value="<%=UrlConst.PROJECT_DELETE%>" />?id=${project.projectID}" class="text-muted"><i class="material-icons">delete</i></a>
 					                            	</c:if>
 					                            	
@@ -88,7 +88,7 @@
 					                        </tr>		
        									
 										
-       									
+       						
        									
        									</c:forEach>
                   						
@@ -103,77 +103,5 @@
 		</div>
 	</div>
 		
-		<div class="modal pt-5 "
-										        id="demo"
-										        tabindex="-1"
-										        role="dialog"
-										        aria-labelledby="myModalLabel"
-										        aria-hidden="true"
-										      >
-										        <div class="modal-dialog" role="document">
-										          <div class="modal-content">
-										          	
-										            <div class="modal-header text-center">
-										              <h4 class="modal-title w-100 font-weight-bold">Edit Project</h4>
-										            </div>
-										            <div class="modal-body mx-3">
-										            	<form method="post">
-										            		<div class="md-form mb-5">
-											               		
-																
-											                	<input type="hidden" name="ID"  value="${project.projectID}" class="form-control validate" />
-										                
-										            		</div>	
-										            		<div class="md-form mb-5">
-											               		
-																<label data-error="wrong" data-success="right" for="form3">project name</label>
-											                	<input type="text" name="name" id="projectName" value="" class="form-control validate" />
-										                
-										            		</div>	
-										            		 <div class="md-form mb-5">
-										                		
-																<label data-error="wrong" data-success="right" for="form3">desciption</label>
-										                		<input type="text" name="description" class="form-control validate" value="${project.projectDescription }" />
-										                
-										                
-										              		</div>
-										              		<div class="md-form mb-5">
-										                		
-																<label data-error="wrong" data-success="right" for="form3">start</label>
-										                		<input type="date" name="start" class="form-control validate" value="${project.startDate}" />
-										                
-										                
-										              		</div>
-										             		 <div class="md-form mb-5">
-										                		
-																<label data-error="wrong" data-success="right" for="form3">end</label>
-										                		<input type="date" name="end" class="form-control validate" value="${project.endDate }" />
-										                
-										                
-										              		</div>
-										              		<div class="md-form mb-4">
-										                		
-																<label data-error="wrong" data-success="right" for="form2">ownerID</label>
-										                		<input type="text" name="ownerID" value="${project.ownerID }" class="form-control validate" />
-										               
-										              		</div>
-										           		 	 <div class="modal-footer d-flex justify-content-center">
-										              			<button type="submit" class="btn btn-primary">Change <i class="fas fa-paper-plane-o ml-1"></i>
-										              			</button>
-										            		</div>			
-										              		
-										            			
-										            	</form>
-										              
-													 
-													  
-													 
-										 </div>
-										              
-										           
-          </div>
-        </div>
-     		</div>
-	
-	<!-- END BODY -->
+			
 	</body>

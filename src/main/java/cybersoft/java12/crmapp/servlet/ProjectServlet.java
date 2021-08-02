@@ -29,7 +29,8 @@ import cybersoft.java12.crmapp.util.UrlConst;
 		UrlConst.PROJECT_STAFF,
 		UrlConst.PROJECT_STAFF_ADD,
 		UrlConst.PROJECT_STAFF_REMOVE,
-		UrlConst.PROJECT_INFO
+		UrlConst.PROJECT_INFO,
+		UrlConst.PROJECT_UPDATE
 		
 })
 public class ProjectServlet extends HttpServlet {
@@ -70,6 +71,9 @@ public class ProjectServlet extends HttpServlet {
 			getProjectDelete(req, resp);
 			
 			break;
+		case UrlConst.PROJECT_UPDATE:
+			getProjectUpdate(req,resp);
+			break;
 		case UrlConst.PROJECT_STAFF_REMOVE:
 			getProjectStaffRemoveByID(req,resp);
 			break;
@@ -82,6 +86,14 @@ public class ProjectServlet extends HttpServlet {
 		}
 	}
 
+	private void getProjectUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	 	int id=Integer.parseInt(req.getParameter("id"));
+		Project projectInfo= prjService.projectDetail(id);
+		req.setAttribute("projectInfo", projectInfo);
+		req.getRequestDispatcher(JspConst.PROJECT_UPDATE).forward(req, resp);
+		
+	}
 	private void getProjectStaffRemoveByID(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		// TODO Auto-generated method stub
 		int projectID=Integer.parseInt(req.getParameter("id"));
@@ -134,14 +146,14 @@ public class ProjectServlet extends HttpServlet {
 			postUpdateProject(req,resp);
 			
 			break;
-		case UrlConst.PROJECT_MANAGE:
-		
+		case UrlConst.PROJECT_UPDATE:
+			
+			postUpdateProject(req,resp);	
 			break;
 		case UrlConst.PROJECT_ADD:
 			postAddProject(req,resp);
 			break;
-		case UrlConst.PROJECT_UPDATE:
-			break;
+		
 		case UrlConst.PROJECT_DELETE:
 			break;
 		case UrlConst.PROJECT_INFO:
@@ -198,10 +210,10 @@ public class ProjectServlet extends HttpServlet {
 			resp.sendRedirect(req.getContextPath()+UrlConst.PROJECT_INFO+"?id="+projectID);
 			
 	}
-	private void postUpdateProject(HttpServletRequest req, HttpServletResponse resp) {
+	private void postUpdateProject(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		// TODO Auto-generated method stub
-		int projectID=Integer.parseInt(req.getParameter("ID"));
-		String projectName=req.getParameter("name");
+		int projectID=Integer.parseInt(req.getParameter("id"));
+		String projectName=req.getParameter("project_name");
 		String projectDescription=req.getParameter("description");
 		String projectStart=req.getParameter("start");
 		String projectEnd=req.getParameter("end");
@@ -214,6 +226,7 @@ public class ProjectServlet extends HttpServlet {
 		prj.setEndDate(projectEnd);
 		prj.setOwnerID(projectOwnerID);
 		prjService.updateProject(prj);
+		resp.sendRedirect(req.getContextPath()+UrlConst.PROJECT_DASHBOARD);
 	}
 	private void postAddProject(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub

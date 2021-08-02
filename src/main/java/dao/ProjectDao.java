@@ -286,5 +286,43 @@ public class ProjectDao {
 				}
 				return projects;
 	}
+	public Project projectDetailByID(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		Project prj=new Project();
+		Connection connection=MySqlConnection.getConnection();
+		String query="select id as id,name as name,description as description,start_date as start, end_date as end,owner as owner\r\n"
+				+ "from  project p\r\n"
+				+ "where p.id=?;\r\n";
+			
+		
+
+
+			try {
+				PreparedStatement statement=connection.prepareStatement(query);
+				statement.setInt(1, id);
+				ResultSet result=statement.executeQuery();
+				while(result.next()) {
+					
+					prj.setProjectName(result.getString("name"));
+					prj.setProjectDescription(result.getString("description"));
+					prj.setStartDate(result.getString("start"));
+					prj.setEndDate(result.getString("end"));
+					prj.setOwnerID(result.getInt("owner"));
+//					prj.setOwnerName(result.getString("owner"));
+					prj.setProjectID(result.getInt("id"));	
+					
+					
+				}
+				
+			}
+			catch(SQLException ex) {
+				System.out.println("unable to connect to database");
+				ex.printStackTrace();
+			}
+			finally {
+				connection.close();
+			}
+			return prj;
+	}
 	
 }

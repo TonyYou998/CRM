@@ -121,6 +121,15 @@ public class ProjectService {
 		}
 		return projects;
 	}
+	public Project projectDetail(int id) {
+		// TODO Auto-generated method stub
+		try {
+			return projectDao.projectDetailByID(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
 
 
 	
